@@ -1,4 +1,4 @@
-package com.pb.avrakhov.hm1;
+package com.pb.avrakhov.hw1;
 
 public class HelloWord {
     public static void main(String[] args) {
