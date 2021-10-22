@@ -25,7 +25,7 @@ public class Array {
         } while (counter < 10);
 
         //Выводим массив
-        System.out.print("Вы ввели следующие значения:\n");
+        System.out.println("Вы ввели следующие значения:");
         for (int i : array) {
             System.out.print(i + "  ");
         }
@@ -48,7 +48,7 @@ public class Array {
         System.out.print(counter);
 
         //Сортировка пузырьком (Bubble sort)
-        System.out.print("\nСортированнный массив:\n");
+        System.out.println("\nСортированнный массив:");
         for (int i = (array.length - 1); i > 0; i--) {
             for (int j = 0; j < i; j++) {
                 if (array[j] > array[j + 1]) {

@@ -25,7 +25,7 @@ public class Bingo {
 
             //Проверка, если число выходит за заданный диапазон
             if (userNumber < 0 || (userNumber > 100 && userNumber != 111)) {
-                System.out.print("Вы ввели не корректное число! (Диапозон от 0 до 100)\n");
+                System.out.println("Вы ввели не корректное число! (Диапозон от 0 до 100)");
                 continue;
             }
 
@@ -42,7 +42,7 @@ public class Bingo {
                 //Проверяем по массиву было ли это число ранее
                 for (int i = 0; i < counter; i++) {
                     if (array[i] == userNumber) {
-                        System.out.print("Вы уже загадывали данное число:\n");
+                        System.out.println("Вы уже загадывали данное число:");
 
                         //Вывод массива с попытками
                         for (int j = 0; j < counter; j++) {
@@ -63,10 +63,10 @@ public class Bingo {
                 System.out.print("Поздравляем! Вы угадали число: " + hiddenNumber + "\n" + "Количество попыток: " + (counter + 1));
                 break;
             } else if (userNumber < hiddenNumber) {
-                System.out.print("Загаданное число больше " + userNumber + "\n");
+                System.out.println("Загаданное число больше " + userNumber);
                 counter++;
             } else {
-                System.out.print("Загаданное число меньше " + userNumber + "\n");
+                System.out.println("Загаданное число меньше " + userNumber);
                 counter++;
             }
         }
