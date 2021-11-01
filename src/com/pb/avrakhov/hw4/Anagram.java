@@ -12,7 +12,7 @@ import java.util.Scanner;
 Я в мире — сирота. -> Я в Риме — Ариост.
  */
 public class Anagram {
-    //Убираем знаки препинания и переводим строку  нижний регистр
+    //Убираем знаки препинания и переводим строку в нижний регистр
     static String getLetters(String str) {
         return str.replaceAll("[\\p{P}‘ ]", "").toLowerCase();
     }

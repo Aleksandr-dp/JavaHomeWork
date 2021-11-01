@@ -12,15 +12,15 @@ import java.util.Scanner;
 public class CapitalLetter {
     //Переводим строку в верхний регистр
     static void toUpperCase(String str) {
-        String upperCaseString = "";
+        StringBuilder upperCaseString = new StringBuilder();
 
         for (String word : str.split(" ")) {
-            upperCaseString += Character.toUpperCase(word.charAt(0)) + word.substring(1) + " ";
+            upperCaseString.append(Character.toUpperCase(word.charAt(0))).append(word.substring(1)).append(" ");
         }
 
-        upperCaseString = upperCaseString.substring(0, (upperCaseString.length() - 1)); //Удаляем последний пробел
+        upperCaseString = new StringBuilder(upperCaseString.substring(0, (upperCaseString.length() - 1))); //Удаляем последний пробел
 
-        System.out.println(upperCaseString);
+        System.out.print(upperCaseString);
     }
 
     public static void main(String[] args) {
