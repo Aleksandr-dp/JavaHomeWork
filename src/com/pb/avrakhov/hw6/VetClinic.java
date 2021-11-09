@@ -10,12 +10,12 @@ public class VetClinic {
     public static void main(String[] args) throws Exception {
         Animal animal = new Animal();
         Dog dog = new Dog("Собака", "Гав", "Мясо", "Конура");
-        Dog dog2 = new Dog("Bobik", "Рыыы", "Кости", "Двор");
+        Dog dog1 = new Dog("Bobik", "Рыыы", "Кости", "Двор");
         Cat cat = new Cat("Кот", "Мяу", "Молоко", "Где попало");
         Horse horse = new Horse("Лошадь", "Иго-го", "Сено", "Конюшня");
 
         //Массив с животными
-        Animal[] animals = new Animal[] {dog, cat, horse, dog2};
+        Animal[] animals = new Animal[] {dog, cat, horse, dog1};
 
         System.out.println("food и location пришедшего на прием животного:");
 
