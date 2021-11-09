@@ -1,5 +1,7 @@
 package com.pb.avrakhov.hw6;
 
+import java.util.Objects;
+
 /**
  * В пакете hw6 создайте класс Animal и расширяющие его классы Dog, Cat, Horse. Класс Animal содержит переменные food,
  * location и методы makeNoise, eat, sleep. Метод sleep, например, может выводить на консоль "Такое-то животное спит".
@@ -36,5 +38,19 @@ public class Animal {
 
     public void sleep(String animal) {
         System.out.println(animal + " спит в " + location + ".");
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Animal animal = (Animal) o;
+        return Objects.equals(food, animal.food)
+                && Objects.equals(location, animal.location);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(food, location);
     }
 }

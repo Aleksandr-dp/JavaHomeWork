@@ -10,19 +10,21 @@ public class VetClinic {
     public static void main(String[] args) throws Exception {
         Animal animal = new Animal();
         Dog dog = new Dog("Собака", "Гав", "Мясо", "Конура");
+        Dog dog2 = new Dog("Bobik", "Рыыы", "Кости", "Двор");
         Cat cat = new Cat("Кот", "Мяу", "Молоко", "Где попало");
         Horse horse = new Horse("Лошадь", "Иго-го", "Сено", "Конюшня");
 
         //Массив с животными
-        Animal[] animals = new Animal[] {dog, cat, horse};
+        Animal[] animals = new Animal[] {dog, cat, horse, dog2};
 
         System.out.println("food и location пришедшего на прием животного:");
 
         //Объект класса Veterinarian с помощью рефлексии
         Class<Veterinarian> clazz = Veterinarian.class;
         Method method = clazz.getMethod("treatAnimal", Animal.class);
+        Object o = clazz.newInstance();
+
         for (Animal i: animals) {
-            Object o = clazz.newInstance();
             method.invoke(o, i);
         }
 
