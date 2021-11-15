@@ -1,7 +1,8 @@
 package com.pb.avrakhov;
 
-import java.util.Arrays;
-
+/**
+ * Тестовый класс
+ */
 public class Test {
     public static void main(String[] args) {
 
