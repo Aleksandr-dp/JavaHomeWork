@@ -13,8 +13,8 @@ import java.util.List;
  * и по 10 чисел в каждой строке. Числа разделять пробелами.
  * - createOddNumbersFile - читает файл "numbers.txt", и создает на основе него новый файл "odd-numbers.txt" в который
  * входят все числа из "numbers.txt" только все четные заменены на 0.
- * В методе main продемонстрировать работу методов createNumbersFile и createOddNumbersFile.
- * По желанию можно добавить логирование работы программы.
+ * В методе main продемонстрировать работу методов createNumbersFile и createOddNumbersFile. По желанию можно добавить
+ * логирование работы программы.
  */
 public class FileNumbers {
     static final String PATH = "src\\com\\pb\\avrakhov\\hw9\\files\\";
@@ -37,6 +37,7 @@ public class FileNumbers {
             }
 
             writer.write(data);     //Заносим все в файл
+            System.out.println("The numbers file has been created.");
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
         }
@@ -46,8 +47,25 @@ public class FileNumbers {
     public static void createNumbersFile(String newData) {
         try (Writer writer = new FileWriter(PATH + "odd-numbers.txt")){
             writer.write(newData);
+            System.out.println("\nA new file numbers has been created.");
         } catch (Exception exception) {
             System.out.println(exception.getMessage());
+        }
+
+        //Выводим новый файл в консоль
+        try {
+            Path path = Paths.get(PATH + "odd-numbers.txt");
+            List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+            showFile(lines);
+        } catch (Exception exception) {
+            System.out.println(exception.getMessage());
+        }
+    }
+
+    //Вывод файла в консоль
+    public static void showFile(List<String> lines) {
+        for (String string: lines) {
+            System.out.println(string);
         }
     }
 
@@ -57,6 +75,8 @@ public class FileNumbers {
 
         try {
             List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
+
+            showFile(lines);    //Выводим файл в консоль
 
             for (String string: lines) {
                 String[] words = string.split(" ");     //Получаем массив из чисел одной строки
