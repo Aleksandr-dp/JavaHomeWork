@@ -17,7 +17,7 @@ public class Bingo {
         int counter = 0;                                //Количество попыток (+1)
         int[] array = new int[100];                     //Числа пользователя
 
-        System.out.print("Игра \u00ABBingo\u00BB. Отгадайте число от 0 до 100. Для выхода введите: 111.\n\n"); //Заголовок
+            System.out.print("Игра \u00ABBingo\u00BB. Отгадайте число от 0 до 100. Для выхода введите: 111.\n\n"); //Заголовок
 
         while (true) {
             System.out.print("Введите число от 0 до 100: ");

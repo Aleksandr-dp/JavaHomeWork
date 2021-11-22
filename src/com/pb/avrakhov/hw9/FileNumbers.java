@@ -1,11 +1,13 @@
 package com.pb.avrakhov.hw9;
 
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.util.List;
+import java.util.logging.*;
 
 /**
  * В нем создать методы:
@@ -19,27 +21,37 @@ import java.util.List;
 public class FileNumbers {
     static final String PATH = "src\\com\\pb\\avrakhov\\hw9\\files\\";
     static String data = "";
+    private static final Logger LOGGER = Logger.getLogger(FileNumbers.class.getName());
 
     public static void main(String[] args) throws IOException, NumberFormatException {
+        LogManager logManager = LogManager.getLogManager();
+        logManager.readConfiguration(new FileInputStream(Paths.get(PATH + "logging.properties").toFile()));
+
         createNumbersFile();        //Создаем файл с числами
         createOddNumbersFile();     //Меняем четные на 0
     }
 
+    //Создаем файл с рандомными числами [1; 99]
     public static void createNumbersFile() {
-        try (Writer writer = new FileWriter(PATH + "numbers.txt")){
-            //Создаем строки
+        try (Writer writer = new FileWriter(PATH + "numbers.txt")) {
+
+            LOGGER.log(Level.INFO, "Создаем файл с данными.");
+
+            //Создаем строку
             for (int j = 0; j < 10; j++){
-                //Заполняем числами
+                //Заполняем строку числами
                 for (int i = 0; i < 10; i++) {
-                    data += (int) (1 + Math.random() * 98) + " ";
+                    data += (int) (1 + Math.random() * 99) + " ";
                 }
                 data += "\n";
             }
 
-            writer.write(data);     //Заносим все в файл
+            //Заносим данны в файл
+            writer.write(data);
             System.out.println("The numbers file has been created.");
+            LOGGER.log(Level.INFO, "The numbers file has been created.");
         } catch (Exception exception) {
-            System.out.println(exception.getMessage());
+            LOGGER.log(Level.SEVERE, "Error doing createNumbersFile.", exception);
         }
     }
 
@@ -48,8 +60,9 @@ public class FileNumbers {
         try (Writer writer = new FileWriter(PATH + "odd-numbers.txt")){
             writer.write(newData);
             System.out.println("\nA new file numbers has been created.");
+            LOGGER.log(Level.INFO, "A new file numbers has been created.");
         } catch (Exception exception) {
-            System.out.println(exception.getMessage());
+            LOGGER.log(Level.SEVERE, "Error doing createNumbersFile new.", exception);
         }
 
         //Выводим новый файл в консоль
@@ -58,7 +71,7 @@ public class FileNumbers {
             List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
             showFile(lines);
         } catch (Exception exception) {
-            System.out.println(exception.getMessage());
+            LOGGER.log(Level.SEVERE, "Error console output.", exception);
         }
     }
 
@@ -67,6 +80,8 @@ public class FileNumbers {
         for (String string: lines) {
             System.out.println(string);
         }
+
+        LOGGER.log(Level.INFO, "Console output.");
     }
 
     public static void createOddNumbersFile() throws NumberFormatException {
@@ -77,6 +92,8 @@ public class FileNumbers {
             List<String> lines = Files.readAllLines(path, StandardCharsets.UTF_8);
 
             showFile(lines);    //Выводим файл в консоль
+
+            LOGGER.log(Level.INFO, "Заменяем четные цифры нулями.");
 
             for (String string: lines) {
                 String[] words = string.split(" ");     //Получаем массив из чисел одной строки
@@ -92,7 +109,7 @@ public class FileNumbers {
                             data += "0 ";
                         }
                     } catch (NumberFormatException exception) {
-                        System.out.println("NumberFormatException: " + exception.getMessage());
+                        LOGGER.log(Level.SEVERE, "Error parseInt Integer.", exception);
                     }
                 }
 
@@ -101,7 +118,7 @@ public class FileNumbers {
 
             createNumbersFile(data);        //Создаем новый файл
         } catch (Exception exception) {
-            System.out.println(exception.getMessage());
+            LOGGER.log(Level.SEVERE, "Error readAllLines.", exception);
         }
     }
 }
