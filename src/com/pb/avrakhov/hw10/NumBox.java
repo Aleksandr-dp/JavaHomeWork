@@ -17,7 +17,7 @@ public class NumBox<T extends Number> {
 
     //метод void add(T num) добавляющий число в массив. В случае если массив полон - выбросить исключение.
     public void add(T num) throws ArrayIsFull {
-        Boolean myCase = true;
+        boolean myCase = true;
 
         for(int i = 0; i < numbers.length; i++) {
             if(numbers[i] == null) {
