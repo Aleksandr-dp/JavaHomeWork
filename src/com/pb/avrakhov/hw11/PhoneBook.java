@@ -41,7 +41,8 @@ public class PhoneBook {
             System.out.println("6. Edit Contact.");
             System.out.println("7. Add to file.");
             System.out.println("8. Load from file.");
-            System.out.println("9. Exit.");
+            System.out.println("9. Show Phone Book.");
+            System.out.println("0. Exit.");
 
             String option = scan.nextLine();
 
@@ -71,6 +72,11 @@ public class PhoneBook {
                     loadFromFile();
                     break;
                 case "9":
+                    for(Contact i: contacts) {
+                        System.out.println(i);
+                    }
+                    break;
+                case "0":
                     System.out.println("Bye!");
                     return;
                 default:
