@@ -1,14 +1,13 @@
 package com.pb.avrakhov.hw11;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.nio.file.*;
 import java.util.*;
 
 /**
@@ -21,7 +20,7 @@ import java.util.*;
  */
 public class PhoneBook {
     public static List<Contact> contacts = new ArrayList<>();
-    public static final String path = "src\\com\\pb\\avrakhov\\hw11\\files\\";
+    public static ObjectMapper mapper = new ObjectMapper();
 
     public static void main(String[] args) throws Exception {
         //Default data
@@ -31,6 +30,7 @@ public class PhoneBook {
 
         Scanner scan = new Scanner(System.in);
 
+        //Main menu
         while (true) {
             System.out.println("\nMake a choice:");
             System.out.println("1. Add Contact.");
@@ -85,6 +85,7 @@ public class PhoneBook {
         }
     }
 
+    //Add contact to Phone Book
     public static void addContact(Scanner scan) {
         System.out.println("Enter your full name:");
         String name = scan.nextLine();
@@ -117,6 +118,7 @@ public class PhoneBook {
         contacts.add(new Contact(name, DOB, phones, address));
     }
 
+    //Delete contact from Phone Book
     public static void delContact(Scanner scan) {
         System.out.println("Enter a Name to delete:");
         String name = scan.nextLine();
@@ -130,6 +132,7 @@ public class PhoneBook {
         }
     }
 
+    //Search by Phone Book
     public static void search(Scanner scan) {
         System.out.println("Enter a Name for Search:");
         String name = scan.nextLine();
@@ -149,6 +152,7 @@ public class PhoneBook {
         }
     }
 
+    //Sort contacts by Name
     public static void sortByName(Scanner scan) {
         System.out.println("Before sort:");
         for(Contact i: contacts) {
@@ -163,6 +167,7 @@ public class PhoneBook {
         }
     }
 
+    //Sort contacts by Date Edit
     public static void sortByDate(Scanner scan) {
         System.out.println("Before sort:");
         for(Contact i: contacts) {
@@ -177,6 +182,7 @@ public class PhoneBook {
         }
     }
 
+    //Edit contact
     public static void editContact(Scanner scan) {
         System.out.println("Enter a Name for Edit:");
         String name = scan.nextLine();
@@ -252,9 +258,9 @@ public class PhoneBook {
         }
     }
 
+    //Add JSON to File
     public static void addToFile() throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
         String json = mapper.writeValueAsString(contacts);
 
         try(Writer writer = new FileWriter("src\\com\\pb\\avrakhov\\hw11\\files\\json.txt")) {
@@ -266,13 +272,11 @@ public class PhoneBook {
         System.out.println(json);
     }
 
+    //Load JSON from File
     public static void loadFromFile() throws Exception {
-        ObjectMapper mapper = new ObjectMapper();
-
         try {
-            Path path = Paths.get("src\\com\\pb\\avrakhov\\hw11\\files\\json.txt");
-            List<String> json = Files.readAllLines(path, StandardCharsets.UTF_8);
-            List<Contact> newContacts = mapper.readValue(json.toString(), List.class);
+            String json = new String(Files.readAllBytes(Paths.get("src\\com\\pb\\avrakhov\\hw11\\files\\json.txt")), StandardCharsets.UTF_8);
+            List<Contact> newContacts = mapper.readValue(json, List.class);
 
             System.out.println(newContacts.toString());
         } catch (Exception exception) {
