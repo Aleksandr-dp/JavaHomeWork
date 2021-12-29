@@ -18,7 +18,7 @@ public class Producer extends Thread {
                 System.out.println();
 
                 while (buffer.size() < 5) {
-                    System.out.println(getName() + " - " + data.get(0));
+                    System.out.println(getName() + ": " + data.get(0));
                     buffer.add(data.get(0));
                     data.remove(0);
                 }

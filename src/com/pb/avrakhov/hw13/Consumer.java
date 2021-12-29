@@ -17,7 +17,7 @@ public class Consumer extends Thread {
                 int count = 0;
 
                 while (count < 5) {
-                    System.out.println(getName() + " - " + buffer.get(0));
+                    System.out.println(getName() + ": " + buffer.get(0));
                     buffer.remove(0);
                     count++;
                 }
